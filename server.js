@@ -14,9 +14,9 @@ app.listen(3000, () => {
 
 // Response: Include the username from the URL in the response, such as “Hello there, Christy!” or “What a delight it is to see you once more, Mathilda.”
 
-//! app.get('/greetings/:name', (req, res) => {
-//!     res.send(`Hey hey, ${req.params.name}!`);
-//!   });
+app.get('/greetings/:name', (req, res) => {
+    res.send(`Hey hey, ${req.params.name}!`);
+});
 
 
 // 2. Rolling the Dice
@@ -28,14 +28,14 @@ app.listen(3000, () => {
   
 // Functionality: If a valid number is provided, respond with a random whole number between 0 and the given number. For example, a request to /roll/16 might respond with “You rolled a 14.”
 
-// !app.get('/roll/:num', (req, res) => {
-// !    const num = parseInt(req.params.num)
-// !    if (isNaN(num)) {
-// !        res.send("You must specify a number.");
-// !    } else {
-// !        res.send(`You rolled a ${req.params.num}!`);
-// !    }
-// !});
+app.get('/roll/:num', (req, res) => {
+    const num = parseInt(req.params.num)
+    if (isNaN(num)) {
+        res.send("You must specify a number.");
+    } else {
+        res.send(`You rolled a ${req.params.num}!`);
+    }
+});
 
 
 // 3. I Want THAT One!
@@ -43,27 +43,28 @@ app.listen(3000, () => {
 
 // Examples: Matches routes such as /collectibles/2 or /collectibles/0.
 
-// const collectibles = [
-//     { name: 'shiny ball', price: 5.95 },
-//     { name: 'autographed picture of a dog', price: 10 },
-//     { name: 'vintage 1970s yogurt SOLD AS-IS', price: 0.99 }
-//   ];
+const collectibles = [
+    { name: 'shiny ball', price: 5.95 },
+    { name: 'autographed picture of a dog', price: 10 },
+    { name: 'vintage 1970s yogurt SOLD AS-IS', price: 0.99 }
+  ];
 
 // Validation: If the index does not correspond to an item in the array, respond with “This item is not yet in stock. Check back soon!”
 
 // Response: Should describe the item at the given index, like “So, you want the shiny ball? For 5.95, it can be yours!” Include both the name and price properties.
 
-// ! app.get('/collectibles/:index', (req, res) => {
-// !     const index = parseInt(req.params.index)
-// !     if (index >= collectibles.length) {
-// !         res.send("This item is not yet in stock. Check back soon!")
-// !     } else {
-    // * Collectibles is an array so a const declaration or variable is needed to define 'item' as an index of the array, we are then be able to access the properties of the object through the template literals.
-// !         const item = collectibles[index];
-// !         res.send(`So, you want the ${item.name}? For ${item.price}, it can be yours!`)
-// !     }
-// ! })
+app.get('/collectibles/:index', (req, res) => {
 
+    const index = parseInt(req.params.index)
+
+    if (index >= collectibles.length) {
+        res.send("This item is not yet in stock. Check back soon!")
+    } else {
+    //! Collectibles is an array so a const declaration or variable is needed to define 'item' as an index of the array, we are then be able to access the properties of the object through the template literals.
+    const item = collectibles[index];
+    res.send(`So, you want the ${item.name}? For ${item.price}, it can be yours!`)
+}
+})
 
 // 4. Filter Shoes by Query Parameters
 
